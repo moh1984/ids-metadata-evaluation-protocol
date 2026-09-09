@@ -1,0 +1,6 @@
+Feature set,n,CV PR-AUC,Test PR-AUC,Test ROC-AUC
+Raw attributes only,7,0.404,0.4254,0.7641
+Raw + traffic-volume only,11,0.378,0.4509,0.7876
+Raw + port-level only,13,0.4911,0.4951,0.7782
+Raw + user-agent/URL only,15,0.6175,0.606,0.8826
+Raw + temporal only,8,0.4006,0.4363,0.7711
