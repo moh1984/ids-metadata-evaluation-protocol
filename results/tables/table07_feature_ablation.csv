@@ -1,6 +1,0 @@
-Feature set,n,CV PR-AUC,CV std,Test PR-AUC,Delta PR-AUC,Test ROC-AUC
-Raw attributes only,7,0.404,0.0749,0.4254,,0.7641
-+ traffic-volume derivations,11,0.378,0.0864,0.4509,+0.0256,0.7876
-+ port-level indicators,17,0.4706,0.06,0.51,+0.0591,0.7916
-+ user-agent and URL features,25,0.6662,0.038,0.6631,+0.1531,0.9102
-+ temporal attribute (full set),26,0.6703,0.0457,0.67,+0.0068,0.9087
