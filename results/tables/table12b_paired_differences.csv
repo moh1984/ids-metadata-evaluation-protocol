@@ -1,0 +1,6 @@
+Comparison,Metric,Difference,95% CI,Excludes zero
+Gradient Boosting minus Logistic Regression,PR-AUC,0.3567,"[0.2629, 0.449]",yes
+Gradient Boosting minus SVM (RBF Kernel),PR-AUC,0.3947,"[0.3002, 0.4861]",yes
+Gradient Boosting minus Random Forest,PR-AUC,0.0117,"[-0.0255, 0.0505]",no
+Gradient Boosting minus Neural Network (FFNN),PR-AUC,0.3282,"[0.2348, 0.422]",yes
+Gradient Boosting minus Neural Network (balanced),PR-AUC,0.4194,"[0.327, 0.5092]",yes

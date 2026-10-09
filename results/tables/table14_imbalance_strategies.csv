@@ -1,0 +1,13 @@
+Model,Imbalance strategy,PR-AUC,Attack precision (%),Attack recall (%),FPR (%),Attack F1 (%),TP,FP
+Logistic Regression,A. Class weighting (as submitted),0.3104,13.91,80.0,20.625,23.7,96,594
+Logistic Regression,B. SMOTE on training partition,0.293,13.47,76.67,20.5208,22.91,92,591
+Logistic Regression,C. Random under-sampling,0.2273,10.43,68.33,24.4444,18.1,82,704
+Logistic Regression,D. Class weighting + tuned threshold (0.88),0.3104,35.83,35.83,2.6736,35.83,43,77
+Random Forest,A. Class weighting (as submitted),0.6594,76.62,49.17,0.625,59.9,59,18
+Random Forest,B. SMOTE on training partition,0.5906,69.05,48.33,0.9028,56.86,58,26
+Random Forest,C. Random under-sampling,0.411,14.84,85.83,20.5208,25.31,103,591
+Random Forest,D. Class weighting + tuned threshold (0.22),0.6594,61.19,68.33,1.8056,64.57,82,52
+Gradient Boosting,A. Class weighting (as submitted),0.67,68.38,66.67,1.2847,67.51,80,37
+Gradient Boosting,B. SMOTE on training partition,0.6671,77.27,56.67,0.6944,65.38,68,20
+Gradient Boosting,C. Random under-sampling,0.3365,16.61,85.0,17.7778,27.79,102,512
+Gradient Boosting,D. Class weighting + tuned threshold (0.45),0.67,68.07,67.5,1.3194,67.78,81,38

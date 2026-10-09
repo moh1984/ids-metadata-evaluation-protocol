@@ -1,0 +1,7 @@
+{
+ "Logistic Regression": "{'clf__C': 10.0}",
+ "SVM (RBF Kernel)": "{'clf__C': 1.0, 'clf__gamma': 'scale'}",
+ "Random Forest": "{'clf__max_depth': 15, 'clf__max_features': 0.5, 'clf__n_estimators': 300}",
+ "Gradient Boosting": "{'clf__learning_rate': 0.05, 'clf__max_depth': 4, 'clf__n_estimators': 300}",
+ "Neural Network (FFNN)": "{'clf__alpha': 0.01, 'clf__hidden_layer_sizes': (64, 32)}"
+}

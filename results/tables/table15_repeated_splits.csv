@@ -1,0 +1,6 @@
+Model,PR-AUC mean,PR-AUC sd,Attack precision mean (%),Attack recall mean (%),FPR mean (%),Best on PR-AUC,Rank
+Gradient Boosting,0.6823,0.0295,71.13,67.67,1.1458,4,1
+Random Forest,0.6577,0.0387,76.05,43.67,0.5694,1,2
+Neural Network (FFNN),0.3736,0.0396,53.2,18.5,0.6667,0,3
+Logistic Regression,0.3415,0.0231,14.15,78.17,19.7569,0,4
+SVM (RBF Kernel),0.3112,0.036,19.41,49.83,9.6181,0,5

@@ -1,0 +1,4 @@
+Variant,PR-AUC,Attack precision,Attack recall,FPR
+As submitted (no imbalance handling),0.339,51.61,13.33,0.52
+Sample weighting in fit(),0.3671,13.87,75.83,19.62
+Training partition resampled to 1:1,0.2465,9.7,80.83,31.35

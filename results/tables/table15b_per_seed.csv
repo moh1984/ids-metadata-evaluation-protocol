@@ -1,0 +1,26 @@
+Seed,Model,PR-AUC,Attack precision (%),Attack recall (%),FPR (%)
+42,Logistic Regression,0.3104,13.913,80.0,20.625
+42,SVM (RBF Kernel),0.271,15.0812,54.1667,12.7083
+42,Random Forest,0.6594,76.6234,49.1667,0.625
+42,Neural Network (FFNN),0.339,51.6129,13.3333,0.5208
+42,Gradient Boosting,0.67,68.3761,66.6667,1.2847
+1,Logistic Regression,0.3553,13.8346,76.6667,19.8958
+1,SVM (RBF Kernel),0.3,13.7097,56.6667,14.8611
+1,Random Forest,0.7134,81.6901,48.3333,0.4514
+1,Neural Network (FFNN),0.4326,61.2245,25.0,0.6597
+1,Gradient Boosting,0.7083,74.7826,71.6667,1.0069
+7,Logistic Regression,0.3541,14.9163,81.6667,19.4097
+7,SVM (RBF Kernel),0.3355,21.673,47.5,7.1528
+7,Random Forest,0.6136,69.2308,37.5,0.6944
+7,Neural Network (FFNN),0.3554,50.0,13.3333,0.5556
+7,Gradient Boosting,0.64,69.0909,63.3333,1.1806
+13,Logistic Regression,0.3238,13.9969,75.0,19.2014
+13,SVM (RBF Kernel),0.2895,18.241,46.6667,8.7153
+13,Random Forest,0.6715,78.4615,42.5,0.4861
+13,Neural Network (FFNN),0.3953,51.5625,27.5,1.0764
+13,Gradient Boosting,0.7116,75.0,70.0,0.9722
+2024,Logistic Regression,0.3639,14.1123,77.5,19.6528
+2024,SVM (RBF Kernel),0.3601,28.3422,44.1667,4.6528
+2024,Random Forest,0.6306,74.2424,40.8333,0.5903
+2024,Neural Network (FFNN),0.3456,51.6129,13.3333,0.5208
+2024,Gradient Boosting,0.6816,68.3761,66.6667,1.2847

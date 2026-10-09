@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this software or dataset, please cite the paper below."
+title: "Evaluation Protocol Matters More Than Model Choice: Intrusion Detection from Raw Network Metadata Under a Preserved Class Prior"
+authors:
+  - family-names: Alzghoul
+    given-names: Musab
+    affiliation: "Isra University, Faculty of Information Technology, Department of Computer Science, Amman, Jordan"
+  - family-names: Baklizi
+    given-names: Mahmoud
+    affiliation: "University of Petra, Faculty of Information Technology, Department of Computer Science, Amman, Jordan"
+  - family-names: Alkhazaleh
+    given-names: Mohammad
+    affiliation: "Isra University, Faculty of Information Technology, Department of Computer Science, Amman, Jordan"
+    email: m.alkhazaleh@iu.edu.jo
+  - family-names: Qtaish
+    given-names: Osama
+    affiliation: "Isra University, Faculty of Information Technology, Department of Software Engineering, Amman, Jordan"
+license: MIT
+repository-code: "https://github.com/moh1984/ids-metadata-evaluation-protocol"
+url: "https://github.com/moh1984/ids-metadata-evaluation-protocol"
+keywords:
+  - intrusion detection
+  - machine learning
+  - class imbalance
+  - explainable AI
+  - SHAP
+  - network security
+preferred-citation:
+  type: article
+  title: "Evaluation Protocol Matters More Than Model Choice: Intrusion Detection from Raw Network Metadata Under a Preserved Class Prior"
+  authors:
+    - family-names: Alzghoul
+      given-names: Musab
+    - family-names: Baklizi
+      given-names: Mahmoud
+    - family-names: Alkhazaleh
+      given-names: Mohammad
+    - family-names: Qtaish
+      given-names: Osama
+  year: 2026

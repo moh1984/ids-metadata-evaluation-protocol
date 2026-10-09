@@ -1,0 +1,6 @@
+Model,TPR (%),FPR (%),Precision at 4.0% (%),"Alerts per 100,000 at 4.0%",True alerts at 4.0%,Precision at 1.0% (%),"Alerts per 100,000 at 1.0%",True alerts at 1.0%,Precision at 0.1% (%),"Alerts per 100,000 at 0.1%",True alerts at 0.1%
+Logistic Regression,80.0,20.625,13.91,23000,3200,3.77,21219,800,0.39,20684,80
+SVM (RBF Kernel),54.17,12.7083,15.08,14367,2167,4.13,13123,542,0.42,12750,54
+Random Forest,49.17,0.625,76.62,2567,1967,44.28,1110,492,7.3,674,49
+Gradient Boosting,66.67,1.2847,68.38,3900,2667,34.39,1939,667,4.94,1350,67
+Neural Network (FFNN),13.33,0.5208,51.61,1033,533,20.55,649,133,2.5,534,13

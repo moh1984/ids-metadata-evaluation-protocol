@@ -1,0 +1,11 @@
+Rank,Feature,Mean |SHAP|
+1,ua_len,1.4043688
+2,port_diff,1.2563716
+3,dst_is_service,0.99117833
+4,dst_port,0.8875933
+5,src_port,0.5174778
+6,bytes_received,0.46826953
+7,bytes_ratio,0.46472716
+8,bytes_sent,0.41777247
+9,total_bytes,0.3472352
+10,hour,0.30685458
