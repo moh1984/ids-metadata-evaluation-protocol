@@ -9,3 +9,4 @@ xgboost==3.4.0
 shap==0.52.0
 statsmodels==0.14.6
 matplotlib==3.10.8   # >=3.9 required: make_figures.py uses boxplot(tick_labels=...)
+imbalanced-learn==0.14.2  # SMOTENC, strategy B of Table 10

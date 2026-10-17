@@ -4,7 +4,7 @@
 
 Code, data and results for the paper:
 
-> **Evaluation Protocol Matters More Than Model Choice: Intrusion Detection from Raw Network Metadata Under a Preserved Class Prior**
+> **Evaluation Protocol Matters More Than Model Choice: A Simulated-Data Study of Intrusion Detection from Raw Network Metadata Under a Preserved Class Prior**
 > Musab Alzghoul¹, Mahmoud Baklizi², Mohammad Alkhazaleh¹*, Osama Qtaish³
 > ¹ Isra University, Dept. of Computer Science · ² University of Petra, Dept. of Computer Science · ³ Isra University, Dept. of Software Engineering · * corresponding author
 
@@ -73,8 +73,10 @@ python src/feature_ablation.py          # cumulative ablation, per-fold CV score
 python src/multiclass_shap.py           # multi-class results and SHAP
 python src/prevalence_sensitivity.py    # precision and alert volume at three priors
 python src/reviewer_response.py --boot 2000   # bootstrap intervals, paired differences, FFNN variants
-python src/imbalance_baselines.py       # imbalance strategies on a fixed split
+python src/imbalance_baselines.py       # imbalance strategies on a fixed split, incl. SMOTENC
 python src/repeated_splits.py           # stability of the ordering across five splits
+python src/provenance_checks.py         # label conditioning and grouping structure of the raw fields
+python src/temporal_split.py            # chronological 70/30 split
 python src/make_figures.py              # all figures, drawn at final print size
 ```
 
@@ -84,7 +86,7 @@ were measured on two CPU cores and scale with core count.
 
 **Google Colab:** open `notebooks/IDS_pipeline_colab.ipynb`. Colab ships everything except `shap`, which the first cell installs. No GPU required — set Runtime → CPU.
 
-All randomness is controlled by `--seed` (default 42), which fixes the split, the CV folds and every estimator. `run_all.sh` passes it to every stage that takes it. Two scripts are exceptions: `prevalence_sensitivity.py` is deterministic and takes no seed, and `repeated_splits.py` uses its own list of seeds (42, 1, 7, 13, 2024) because varying the split is the point of that experiment.
+All randomness is controlled by `--seed` (default 42), which fixes the split, the CV folds and every estimator. `run_all.sh` passes it to every stage that takes it. Three scripts are exceptions: `prevalence_sensitivity.py` and `provenance_checks.py` are deterministic and take no seed, and `repeated_splits.py` uses its own list of seeds (42, 1, 7, 13, 2024) because varying the split is the point of that experiment.
 
 Dependency versions are **pinned** in `requirements.txt`. XGBoost in particular is version-sensitive (histogram binning), and loosening the pin produces small numerical drift in the third decimal.
 
@@ -101,7 +103,7 @@ bytes_received, user_agent, url, is_internal_traffic, label, attack_type
 
 ```
 data/            the 10,000-record dataset (see Data provenance below)
-src/             seven analysis scripts plus the figure-generation script
+src/             nine analysis scripts plus the figure-generation script
 notebooks/       two Colab runners: the main pipeline and the revision analyses
 results/tables/  every table in the paper, as CSV
 results/figures/ all ten figures, exactly as published

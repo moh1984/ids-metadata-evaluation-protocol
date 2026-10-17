@@ -13,12 +13,14 @@ Every number in the paper, and where it comes from.
 | Table 7 — Five-Fold cross-Validation on the training partition | `table06_crossval_prauc.csv` | `ids_pipeline.py` |
 | Table 8 — Paired bootstrap differences in PR-AUC, 2,000 resamples | `table12b_paired_differences.csv` | `reviewer_response.py` |
 | Table 9 — Stability of the ordering across five stratified splits | `table15_repeated_splits.csv, table15b_per_seed.csv` | `repeated_splits.py` |
-| Table 10 — Imbalance strategies compared on the same data, split and configurations | `table14_imbalance_strategies.csv` | `imbalance_baselines.py` |
+| Table 10 — Imbalance strategies compared on the same data, split and configurations (strategy B is SMOTENC) | `table14_imbalance_strategies.csv` | `imbalance_baselines.py` |
 | Table 11 — Cumulative contribution of each engineered feature group (Gradient boosting) | `table07_feature_ablation.csv` | `feature_ablation.py` |
 | Table 12 — Multi-class tuning protocol and selected configurations | `mc_best_params.json` | `multiclass_shap.py` |
 | Table 13 — Multi-Class classification performance | `table08_multiclass.csv` | `multiclass_shap.py` |
 | Table 14 — Per-Class performance of XGBoost multi-Class classifier | `table09_perclass.csv` | `multiclass_shap.py` |
 | Table 15 — Top-10 features by mean absolute SHAP value (XGBoost binary classifier) | `table10_shap.csv` | `multiclass_shap.py` |
+| Section 6.1 — user-agent label conditioning and field cardinality | `table16_label_conditioning.csv, table16b_field_cardinality.csv` | `provenance_checks.py` |
+| Section 6.1 — chronological 70/30 split | `table17_temporal_split.csv` | `temporal_split.py` |
 | Figure 5 | `results/figures/fig10_prevalence_sensitivity.png` | `prevalence_sensitivity.py` |
 | Figures 1–4 and 6–10 | `results/figures/fig0*.png` | `make_figures.py` |
 | Section 5.4 — McNemar tests | `table_mcnemar_significance.csv` | `ids_pipeline.py` |
@@ -57,6 +59,7 @@ PR-AUC 0.6700. Install from the pinned file to reproduce exactly.
 ```
 scikit-learn 1.8.0 · xgboost 3.4.0 · shap 0.52.0
 numpy 2.4.4 · pandas 3.0.2 · scipy 1.17.1 · statsmodels 0.14.6
+imbalanced-learn 0.14.2
 ```
 
 ### Provenance of the bootstrap outputs
@@ -64,3 +67,10 @@ numpy 2.4.4 · pandas 3.0.2 · scipy 1.17.1 · statsmodels 0.14.6
 `table12_bootstrap_intervals.csv` and `table12b_paired_differences.csv` were produced on Google Colab with XGBoost installed, which is required for the gradient-boosting rows. `table12b` was written from the paired differences that the same run reported, in the layout the current script emits. Re-running
 `python src/reviewer_response.py --boot 2000` regenerates both, and also adds the sample-weighted
 feed-forward variant that the manuscript reports in Table 5.
+
+### Provenance of Table 10
+
+`table14_imbalance_strategies.csv` was regenerated in full in a clean environment pinned to `requirements.txt`
+plus imbalanced-learn 0.14.2. Rows A, C and D reproduced the previously committed values to every reported
+digit; row B changed because the hand-written oversampler used in the first revision was replaced by SMOTENC,
+which treats the fourteen non-continuous features as categorical instead of interpolating them.

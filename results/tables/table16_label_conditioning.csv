@@ -1,0 +1,14 @@
+user_agent,Length,Benign,Attack,Attack-exclusive
+Mozilla/5.0 (compatible; sqlmap/1.7),36,0,27,True
+python-requests/2.28,20,0,23,True
+curl/7.81.0,11,0,21,True
+"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",111,3362,96,False
+"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",117,2418,67,False
+sqlmap/1.8,10,87,31,False
+"Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1",135,1177,28,False
+curl/8.4.0,10,779,27,False
+zgrab/0.x,9,88,26,False
+Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html),72,449,17,False
+Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0,80,377,15,False
+python-requests/2.31.0,22,566,15,False
+python-urllib/3.9,17,297,7,False

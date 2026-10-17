@@ -1,0 +1,4 @@
+Model,PR-AUC (chronological),"PR-AUC (random, Table 4)",Attack precision (%),Attack recall (%),FPR (%),ROC-AUC,TP,FP
+Logistic Regression,0.2924,0.3104,15.02,78.57,19.485,0.8644,99,560
+Random Forest,0.6613,0.6594,77.03,45.24,0.5915,0.9293,57,17
+Gradient Boosting,0.6754,0.67,73.5,68.25,1.0786,0.9132,86,31

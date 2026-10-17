@@ -1,0 +1,14 @@
+Field,Distinct values,Distinct / records
+timestamp,9998,0.9998
+src_ip,10000,1.0
+dst_ip,10000,1.0
+src_port,7647,0.7647
+dst_port,449,0.0449
+protocol,3,0.0003
+bytes_sent,9280,0.928
+bytes_received,9541,0.9541
+user_agent,13,0.0013
+url,6768,0.6768
+is_internal_traffic,2,0.0002
+label,2,0.0002
+attack_type,10,0.001

@@ -104,6 +104,9 @@ def main(doc_dir, letter_path, repo_dir):
         'accepts neither class weights nor sample weights': 'MLPClassifier does accept sample_weight',
         'overlap almost entirely': 'overlap is not a test of a paired difference',
         'all results here use the default 0.5 cutoff': 'contradicts the threshold table',
+        '1.29% false-positive rate': 'the gradient-boosting FPR is 37/2,880 = 1.28%',
+        'B. SMOTE on training partition': 'strategy B is SMOTENC, not the hand-written oversampler',
+        'SMOTE-style baseline': 'replaced by the SMOTENC reference implementation',
     }
     for phrase, why in banned.items():
         if phrase in x:
@@ -251,6 +254,59 @@ def main(doc_dir, letter_path, repo_dir):
         n_fig = len([f for f in os.listdir(figures) if f.endswith('.png')])
         if n_fig != len(fcaps):
             fail('Repository', f'{n_fig} figure files against {len(fcaps)} captions')
+
+    # ---- a model's FPR must agree between Table 4 and Table 10 row A ------
+    # Two rounding-boundary values (0.625% and 20.625%) were reported
+    # inconsistently across these two tables in an earlier revision.
+    def table_rows(caption_prefix):
+        i = x.find(caption_prefix)
+        if i < 0:
+            return []
+        ts = x.find('<w:tbl>', i)
+        te = x.find('</w:tbl>', ts)
+        if ts < 0 or te < 0:
+            return []
+        out = []
+        for r in re.findall(r'<w:tr[ >].*?</w:tr>', x[ts:te], re.S):
+            out.append([re.sub(r'<[^>]+>', '', c)
+                        for c in re.findall(r'<w:tc>.*?</w:tc>', r, re.S)])
+        return out
+
+    def first_number(s):
+        m = re.search(r'\d+\.\d+', s or '')
+        return m.group(0) if m else None
+
+    t4 = {}
+    for row in table_rows('Table 4. Binary classification results'):
+        if not row or len(row) < 7:
+            continue
+        name = row[0].strip()
+        for cell in row:
+            if '[' in cell and name:
+                pass
+        t4[name] = row
+
+    t10 = {}
+    for row in table_rows('Imbalance strategies compared on the same data'):
+        if len(row) >= 6 and row[1].strip().startswith('A.'):
+            t10[row[0].strip()] = first_number(row[5])
+
+    # Table 4 column order: Model, Accuracy, BalAcc, Recall, Precision, F1, FPR, PR-AUC, ROC-AUC
+    for name, fpr10 in t10.items():
+        key = next((k for k in t4 if k.replace('\n', ' ').startswith(name.split()[0])), None)
+        row = t4.get(key)
+        if not row or fpr10 is None or len(row) < 7:
+            continue
+        fpr4 = first_number(row[6])
+        if fpr4 and fpr4 != fpr10:
+            fail('Cross-table', f'{name}: FPR is {fpr4}% in Table 4 but {fpr10}% in Table 10')
+
+    # ---- every script the README lists must exist -------------------------
+    readme = os.path.join(repo_dir, 'README.md')
+    if os.path.exists(readme):
+        for s in set(re.findall(r'src/(\w+\.py)', open(readme, encoding='utf-8').read())):
+            if not os.path.exists(os.path.join(repo_dir, 'src', s)):
+                fail('Repository', f'README lists src/{s}, which does not exist')
 
     # ---- report ------------------------------------------------------------
     if problems:
