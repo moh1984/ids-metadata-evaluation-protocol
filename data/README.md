@@ -2,14 +2,36 @@
 
 `cybersecurity_dataset.csv` — 10,000 network flow records, 13 raw attributes.
 
+## Source and licence
+
+`cybersecurity_dataset.csv` is redistributed, unmodified, from the Kaggle dataset
+**Cybersecurity Threat Detection Dataset** by Dhrubang Talukdar, published under
+the **MIT License**:
+
+<https://www.kaggle.com/datasets/dhrubangtalukdar/cybersecurity-threat-detection-dataset>
+
+It is included in this repository so that `run_all.sh` reproduces every reported
+number without a separate download. Kaggle lists the dataset under the MIT
+License, and the file is redistributed here unmodified with the attribution
+above. The dataset is the publisher's work, not ours. Users who need a legal
+determination for their own redistribution should consult the source page and
+their own counsel rather than rely on this note.
+
 ## Provenance
 
-Generated from a **simulated** enterprise network environment. Simulation gives
-clean labels and controlled attack proportions, which is what makes a controlled
-model comparison possible, but the statistical regularities the classifiers
-exploit are ultimately those the generator produced. Results obtained on this
-data should not be read as estimates of accuracy on production traffic.
-See Section 6.1 of the paper.
+The publisher's description does not state how the records were produced. We
+infer a **simulated** environment from the file itself: all 10,000 source
+addresses and all 10,000 destination addresses are distinct, which is highly
+atypical of captured enterprise traffic and is consistent with synthetic
+generation, and the `user_agent` field takes only thirteen values.
+`src/provenance_checks.py` measures both.
+
+Simulation gives clean labels and controlled attack proportions, which is what
+makes a controlled model comparison possible, but the statistical regularities
+the classifiers exploit are ultimately those the generator produced. Results
+obtained on this data should not be read as estimates of accuracy on production
+traffic. See Section 6.1 of the paper, and the note on label conditioning in the
+top-level README.
 
 ## Schema
 

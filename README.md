@@ -27,7 +27,7 @@ Held-out partition: 3,000 flows (2,880 benign, 120 attack), preserving the sourc
 | Logistic Regression | 79.40 | 79.69 | 80.00 | 13.91 | 20.63 | 0.310 | 0.863 |
 | SVM (RBF) | 85.97 | 70.73 | 54.17 | 15.08 | 12.71 | 0.271 | 0.837 |
 | Random Forest | 97.37 | 74.27 | 49.17 | **76.62** | **0.63** | 0.659 | **0.911** |
-| **Gradient Boosting** | 97.43 | **82.69** | **66.67** | 68.38 | 1.29 | **0.670** | 0.909 |
+| **Gradient Boosting** | 97.43 | **82.69** | **66.67** | 68.38 | 1.28 | **0.670** | 0.909 |
 | Neural Network | 96.03 | 56.41 | 13.33 | 51.61 | 0.52 | 0.339 | 0.859 |
 
 McNemar exact tests on paired predictions: nine of ten pairwise comparisons significant at *p* < 0.001. The exception is **gradient boosting vs. random forest (p = 0.885)** — statistically indistinguishable in overall correctness, differing instead in operating point.
@@ -120,9 +120,19 @@ docs/            what the corrected protocol changes and why
 
 ## Data provenance
 
-`data/cybersecurity_dataset.csv` contains 10,000 flow records generated from a **simulated** enterprise network environment: 9,600 benign and 400 attack, across nine attack categories (brute-force 108, port-scan 81, SQL injection 64, XSS 34, credential stuffing 28, DDoS 27, command injection 26, exploit attempt 22, C2 10).
+`data/cybersecurity_dataset.csv` is redistributed from the Kaggle dataset *Cybersecurity Threat Detection Dataset* by Dhrubang Talukdar, under the MIT License ([source](https://www.kaggle.com/datasets/dhrubangtalukdar/cybersecurity-threat-detection-dataset)). It contains 10,000 flow records from what we infer to be a **simulated** enterprise network environment: 9,600 benign and 400 attack, across nine attack categories (brute-force 108, port-scan 81, SQL injection 64, XSS 34, credential stuffing 28, DDoS 27, command injection 26, exploit attempt 22, C2 10).
 
 Simulation gives clean labels and controlled attack proportions, but the regularities the classifiers exploit are those the generator produced. Results here should not be read as an estimate of accuracy on production traffic. Section 6 of the paper states this and the other limitations in full.
+
+### User-agent values are associated with the class label
+
+`src/provenance_checks.py` measures this, and it is worth knowing before reading the feature results. The `user_agent` field is a template, not free text: thirteen distinct strings cover all 10,000 records. Three of them — `Mozilla/5.0 (compatible; sqlmap/1.7)`, `python-requests/2.28` and `curl/7.81.0` — never appear in benign traffic, so for the 71 attack records carrying one (17.75% of all attacks) the field alone determines the label.
+
+The association is partial rather than wholesale: `sqlmap/1.8` and `zgrab/0.x` are attack-tool strings that also appear in 87 and 88 benign flows. But it is systematic in one respect — the *version* tracks the class. `curl/7.81.0` is attack-only while `curl/8.4.0` is mostly benign; `python-requests/2.28` is attack-only while `python-requests/2.31.0` is mostly benign.
+
+This is the most plausible reason `ua_len` dominates the ablation and SHAP results: a one-character difference between two version strings is carrying part of the signal. Whether that pattern was written into the generator deliberately or arose some other way cannot be determined from the published file; what the file shows is the association. **The feature rankings in this repository describe the fitted models on this generator. They are not evidence that user-agent or URL fields are intrinsically diagnostic of attacks.** The evaluation-protocol finding, which is what the paper argues, does not depend on which feature dominates.
+
+A chronological 70/30 split (`src/temporal_split.py`) reproduces the model ordering and the ensemble PR-AUC, which makes time-localised episodes split across the partition an unlikely explanation of the results, though it says nothing about a template reused across the whole period.
 
 ## The paper
 
@@ -141,3 +151,7 @@ See `CITATION.cff`, or cite the paper directly once published.
 ## License
 
 Code released under the MIT License (`LICENSE`).
+
+`data/cybersecurity_dataset.csv` is not ours. It is redistributed unmodified from
+the Kaggle dataset **Cybersecurity Threat Detection Dataset** by Dhrubang
+Talukdar, published under the MIT License: <https://www.kaggle.com/datasets/dhrubangtalukdar/cybersecurity-threat-detection-dataset>. See `data/README.md`.

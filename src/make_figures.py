@@ -70,7 +70,7 @@ def figure_01():
         ("6", "EXPLAINABILITY", "#1F5F7A",
          ["SHAP attributions", "Global importance", "Feature ablation", "Analyst insights"]),
     ]
-    banner = "Gradient boosting:  PR-AUC 0.670  |  66.67% recall at 1.29% FPR"
+    banner = "Gradient boosting:  PR-AUC 0.670  |  66.67% recall at 1.28% FPR"
     PAD, BW, BH, GX, GY, X0, Y0 = 0.25, 30.0, 34.0, 3.0, 6.5, 1.5, 54.0
     right = X0 + 2 * (BW + GX) + BW + PAD
     assert right <= 100, right          # guards against clipping the third column

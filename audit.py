@@ -308,6 +308,35 @@ def main(doc_dir, letter_path, repo_dir):
             if not os.path.exists(os.path.join(repo_dir, 'src', s)):
                 fail('Repository', f'README lists src/{s}, which does not exist')
 
+    # ---- a stale FPR must not survive in a figure source or in the docs ----
+    # The banned-phrase list below only catches the exact sentence form. The
+    # 1.29% figure also appeared inside the Figure 1 banner ("at 1.29% FPR")
+    # and as a bare cell of the README results table, and both slipped through.
+    stale_numbers = {
+        '1.29': 'the gradient-boosting FPR is 37/2,880 = 1.28%',
+        '20.62%': 'logistic regression is 594/2,880 = 20.625%, reported half-up as 20.63%',
+    }
+    for root, _dirs, files in os.walk(repo_dir):
+        if any(part in root for part in ('.git', '__pycache__')):
+            continue
+        for fn in files:
+            if not fn.endswith(('.py', '.md', '.sh', '.ipynb', '.cff')):
+                continue
+            if fn == 'audit.py':          # this file lists the strings on purpose
+                continue
+            path = os.path.join(root, fn)
+            try:
+                body = open(path, encoding='utf-8').read()
+            except (OSError, UnicodeDecodeError):
+                continue
+            for num, why in stale_numbers.items():
+                for m in re.finditer(re.escape(num), body):
+                    line = body[body.rfind('\n', 0, m.start()) + 1:
+                                body.find('\n', m.end()) if body.find('\n', m.end()) > 0 else len(body)]
+                    rel = os.path.relpath(path, repo_dir)
+                    fail('Repository', f'{rel} still carries {num} - {why}: {line.strip()[:90]!r}')
+                    break
+
     # ---- report ------------------------------------------------------------
     if problems:
         print(f'{len(problems)} problem(s):\n')

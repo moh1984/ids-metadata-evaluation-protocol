@@ -116,6 +116,22 @@ def main():
 
     out = pd.DataFrame(rows)
     out.to_csv(f"{TAB}/table17_temporal_split.csv", index=False)
+
+    # The partition summary is quoted in Section 6.1 ("4.20%", "1 October to
+    # 29 December"), so it is written out rather than left on stdout, where a
+    # reader checking the paper against this repository cannot reach it.
+    part = pd.DataFrame([{
+        "Partition": "train", "Records": len(ytr), "Attack records": int(ytr.sum()),
+        "Attack rate (%)": round(100 * float(ytr.mean()), 2),
+        "First timestamp": str(df["_ts"].iloc[0]), "Last timestamp": str(df["_ts"].iloc[cut - 1]),
+    }, {
+        "Partition": "test", "Records": len(yte), "Attack records": int(yte.sum()),
+        "Attack rate (%)": round(100 * float(yte.mean()), 2),
+        "First timestamp": str(df["_ts"].iloc[cut]), "Last timestamp": str(df["_ts"].iloc[-1]),
+    }])
+    part.to_csv(f"{TAB}/table17b_temporal_partition.csv", index=False)
+    print()
+    print(part.to_string(index=False))
     print()
     print(out.to_string(index=False))
 

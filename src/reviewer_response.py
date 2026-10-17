@@ -35,6 +35,8 @@ import argparse
 import os
 import sys
 
+from decimal import Decimal, ROUND_HALF_UP
+
 import numpy as np
 import pandas as pd
 
@@ -60,6 +62,16 @@ except ImportError:
           "Install the pinned version to reproduce the published numbers.")
 
 TAB = "results/tables"
+
+
+def r(value, places):
+    """Round half-up, so 0.625 becomes 0.63 rather than the 0.62 that Python's
+    round() gives (it rounds halves to even). Two false-positive rates in this
+    study land exactly on that boundary -- 594/2,880 = 20.625% and
+    18/2,880 = 0.625% -- and the manuscript states the half-up convention in the
+    note under Table 4, so the machine-readable tables must follow it too."""
+    q = Decimal(1).scaleb(-places)
+    return float(Decimal(repr(float(value))).quantize(q, rounding=ROUND_HALF_UP))
 
 
 # --------------------------------------------------------------- metrics
@@ -169,7 +181,7 @@ def main():
 
     def row(label, key):
         return {"Variant": label,
-                **{k: round(v * 100, 2) if k != "PR-AUC" else round(v, 4)
+                **{k: r(v * 100, 2) if k != "PR-AUC" else r(v, 4)
                    for k, v in metrics(yte, scores[key], preds[key]).items()}}
 
     ffnn = pd.DataFrame([
@@ -193,7 +205,7 @@ def main():
         for k, v in point.items():
             lo, hi = np.percentile(draws[name][k], [2.5, 97.5])
             scale = 1 if k == "PR-AUC" else 100
-            row[k] = round(v * scale, 4 if scale == 1 else 2)
+            row[k] = r(v * scale, 4 if scale == 1 else 2)
             row[f"{k} 95% CI"] = f"[{lo*scale:.4g}, {hi*scale:.4g}]"
         rows.append(row)
     out = pd.DataFrame(rows)
@@ -222,7 +234,7 @@ def main():
             diffs.append({
                 "Comparison": f"{ref} minus {name}",
                 "Metric": metric,
-                "Difference": round(float(d.mean()) * scale, 4 if scale == 1 else 2),
+                "Difference": r(float(d.mean()) * scale, 4 if scale == 1 else 2),
                 "95% CI": f"[{lo*scale:.4g}, {hi*scale:.4g}]",
                 "Excludes zero": "yes" if not (lo <= 0 <= hi) else "no",
             })

@@ -20,7 +20,7 @@ Every number in the paper, and where it comes from.
 | Table 14 — Per-Class performance of XGBoost multi-Class classifier | `table09_perclass.csv` | `multiclass_shap.py` |
 | Table 15 — Top-10 features by mean absolute SHAP value (XGBoost binary classifier) | `table10_shap.csv` | `multiclass_shap.py` |
 | Section 6.1 — user-agent label conditioning and field cardinality | `table16_label_conditioning.csv, table16b_field_cardinality.csv` | `provenance_checks.py` |
-| Section 6.1 — chronological 70/30 split | `table17_temporal_split.csv` | `temporal_split.py` |
+| Section 6.1 — chronological 70/30 split | `table17_temporal_split.csv, table17b_temporal_partition.csv` | `temporal_split.py` |
 | Figure 5 | `results/figures/fig10_prevalence_sensitivity.png` | `prevalence_sensitivity.py` |
 | Figures 1–4 and 6–10 | `results/figures/fig0*.png` | `make_figures.py` |
 | Section 5.4 — McNemar tests | `table_mcnemar_significance.csv` | `ids_pipeline.py` |

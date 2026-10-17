@@ -1,6 +1,17 @@
 Comparison,Metric,Difference,95% CI,Excludes zero
 Gradient Boosting minus Logistic Regression,PR-AUC,0.3567,"[0.2629, 0.449]",yes
+Gradient Boosting minus Logistic Regression,Attack precision,54.4,"[46.71, 61.66]",yes
+Gradient Boosting minus Logistic Regression,Attack recall,-13.29,"[-22.5, -4.545]",yes
+Gradient Boosting minus Logistic Regression,FPR,-19.34,"[-20.78, -17.93]",yes
 Gradient Boosting minus SVM (RBF Kernel),PR-AUC,0.3947,"[0.3002, 0.4861]",yes
-Gradient Boosting minus Random Forest,PR-AUC,0.0117,"[-0.0255, 0.0505]",no
+Gradient Boosting minus SVM (RBF Kernel),Attack precision,53.23,"[45.54, 60.62]",yes
+Gradient Boosting minus SVM (RBF Kernel),Attack recall,12.57,"[2.459, 22.5]",yes
+Gradient Boosting minus SVM (RBF Kernel),FPR,-11.41,"[-12.56, -10.21]",yes
+Gradient Boosting minus Random Forest,PR-AUC,0.0117,"[-0.02546, 0.05048]",no
+Gradient Boosting minus Random Forest,Attack precision,-8.39,"[-16.26, -0.7845]",yes
+Gradient Boosting minus Random Forest,Attack recall,17.57,"[10.92, 24.55]",yes
+Gradient Boosting minus Random Forest,FPR,0.67,"[0.3453, 1.038]",yes
 Gradient Boosting minus Neural Network (FFNN),PR-AUC,0.3282,"[0.2348, 0.422]",yes
-Gradient Boosting minus Neural Network (balanced),PR-AUC,0.4194,"[0.327, 0.5092]",yes
+Gradient Boosting minus Neural Network (FFNN),Attack precision,16.53,"[-1.049, 33.7]",no
+Gradient Boosting minus Neural Network (FFNN),Attack recall,53.3,"[43.48, 62.5]",yes
+Gradient Boosting minus Neural Network (FFNN),FPR,0.77,"[0.3815, 1.186]",yes

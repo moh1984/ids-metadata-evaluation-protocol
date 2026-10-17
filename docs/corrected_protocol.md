@@ -15,12 +15,13 @@ a prevalence-sensitivity and alert-volume analysis, and paired McNemar tests com
 ## Install
 
 ```bash
-pip install scikit-learn pandas numpy scipy xgboost shap statsmodels
+pip install scikit-learn pandas numpy scipy xgboost shap statsmodels matplotlib imbalanced-learn
 ```
 
 The full reproduction pipeline requires every dependency pinned in
-`requirements.txt`: `feature_ablation.py` imports XGBoost directly and
-`multiclass_shap.py` needs both XGBoost and SHAP. `ids_pipeline.py` alone will
+`requirements.txt`: `feature_ablation.py` imports XGBoost directly,
+`multiclass_shap.py` needs both XGBoost and SHAP, `make_figures.py` needs
+matplotlib, and `imbalance_baselines.py` needs imbalanced-learn for SMOTENC. `ids_pipeline.py` alone will
 fall back to scikit-learn gradient boosting if XGBoost is missing, but the
 manuscript must then say "Gradient Boosting (scikit-learn)", not "XGBoost".
 
@@ -61,6 +62,16 @@ The script exits with a clear message listing any missing columns.
 | `cv_fold_scores.json` | Figure 6 | `feature_ablation.py` |
 | `confusion_matrix_multiclass.csv` | Figure 7 | `multiclass_shap.py` |
 | `feature_importances.csv` | Figure 8 | `feature_ablation.py` |
+| `table11_prevalence_sensitivity.csv` | Table 6 | `prevalence_sensitivity.py` |
+| `table12_bootstrap_intervals.csv` | intervals inside Table 4 | `reviewer_response.py` |
+| `table12b_paired_differences.csv` | Table 8 | `reviewer_response.py` |
+| `table13_ffnn_balanced.csv` | Table 5 | `reviewer_response.py` |
+| `table14_imbalance_strategies.csv` | Table 10 | `imbalance_baselines.py` |
+| `table15_repeated_splits.csv` | Table 9 | `repeated_splits.py` |
+| `table16_label_conditioning.csv` | Section 6.1 | `provenance_checks.py` |
+| `table16b_field_cardinality.csv` | Section 6.1 | `provenance_checks.py` |
+| `table17_temporal_split.csv` | Section 6.1 | `temporal_split.py` |
+| `table17b_temporal_partition.csv` | Section 6.1 (the 4.20% test prevalence and the date windows) | `temporal_split.py` |
 
 This table mirrors `docs/RESULTS.md`, which is the authoritative index.
 

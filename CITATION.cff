@@ -18,6 +18,14 @@ authors:
 license: MIT
 repository-code: "https://github.com/moh1984/ids-metadata-evaluation-protocol"
 url: "https://github.com/moh1984/ids-metadata-evaluation-protocol"
+references:
+  - type: data
+    title: "Cybersecurity Threat Detection Dataset"
+    authors:
+      - name: "Dhrubang Talukdar"
+    url: "https://www.kaggle.com/datasets/dhrubangtalukdar/cybersecurity-threat-detection-dataset"
+    license: MIT
+    notes: "Redistributed unmodified in data/cybersecurity_dataset.csv"
 keywords:
   - intrusion detection
   - machine learning
